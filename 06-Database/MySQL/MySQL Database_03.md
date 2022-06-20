@@ -136,3 +136,80 @@ ex)
 102번 학과의 학생중에서 1학년 또는 4학년 학생의 이름, 학년, 학과 번호를 출력
 -> select name, grade, deptno from student where deptno=102 and (grade=1 or grade=4);
 ```
+<br/><br/>
+
+# 02. 정렬, 부분조회
+
+## ▶︎ 데이터 정렬하기
+
+### * ORDER BY절
+
+- 컬럼이나 표현식을 기준으로 출력 결과를 정렬할 때 사용
+
+```sql
+select [distinct] {* | 컬럼이름 [as 별칭]...} from <테이블 이름> [where 검색조건] [order by 컬럼이름 [정렬옵션]];
+```
+
+- 정렬 옵션
+    - ASC : 오름차순으로 정렬하는 경우에 사용하며 기본값임 → 순차 정렬
+    - DESC : 내림차순으로 정렬하는 경우에 사용하며 생략 불가능 → 역순 정렬
+- 기본적인 정렬 방법(ASC의 경우)
+    - 문자값 : 알파벳순 출력, 한글은 가나다 순으로 출력
+    - 숫자값 : 가장 작은 값부터 먼저 출력
+    - 날짜값 : 과거의 날짜부터 출력
+
+```sql
+ex)
+학생 테이블에서 이름을 가나다 순으로 정렬하여 이름, 학년, 전화번호를 출력
+-> select name, grade, tel from student order by name;
+```
+<br/>
+
+### * 다중 컬럼 정렬
+
+- 2차, 3차 정렬 조건 부여하기
+    - ORDER BY 절에서 지정한 첫번째 컬럼을 기준으로 1차 정렬한 후, 동일한 값이 있는 경우 두번째 컬럼을 기준으로 정렬
+    - 각 컬럼별로 정렬 옵션이 따로 설정됨
+    
+    ```sql
+    select [distinct] {* | 컬럼이름 [as 별칭]...} from <테이블 이름> [where 검색조건]
+    [order by 컬럼이름1 [정렬 옵션], 컬럼이름2 [정렬 옵션], ..., 컬럼이름n [정렬 옵션]];
+    ```
+    
+
+```sql
+ex)
+모든 학생에 대해 학과번호를 오름차순으로 먼저 정렬하고,
+같은 학과 학생들은 학년이 높은 순으로 다시 정렬하여 학번, 이름, 학년, 학과번호, 사용자 아이디를 출력
+-> select studno, name, grade, deptno, userid from student order by deptno ASC, grade DESC;
+```
+<br/>
+
+## ▶︎ 데이터 부분 조회
+
+### * LIMIT 절
+
+- 전체 조회 결과의 x번째 위치에서 부터 y개를 조회
+- x값은 0부터 시작
+
+```sql
+select [distinct] {* | 컬럼이름 [as 별칭] ...} from <테이블 이름> [where 검색 조건]
+[order by 컬럼이름1 [정렬 옵션], 컬럼이름2 [정렬 옵션], ..., 컬럼이름n [정렬 옵션]]
+[limit x, y]
+```
+
+- 참고!
+    - 부분 조회 기능은 프로그램에서 페이지 번호 구현과 관련 있음
+    - Limit 절의 경우 MySQL에서만 지원되는 구문이며, 같은 기능을 MSSQL에서는 TOP절의 형식으로,<br/>Oracle의 경우는 Rawnum이라는 기능으로 제공
+
+```sql
+ex)
+교수테이블에서 급여가 높은 상위 3명의 이름, 직급, 급여를 조회(0번째 위치부터 3건의 데이터 추출하기)
+-> select name, position, sal from professor order by sal DESC limit 0, 3;
+```
+
+- 3건씩 나누어 부분 조회
+    - limit 0, 3 / limit 3, 3 / limit 6, 3 / limit 9, 3
+        
+        → 마지막 페이지에서 지정된 수(3)보다 남아 있는 데이터가 적은 경우 존재하는 만큼만 조회됨<br/>
+        (데이터는 총 10개가 있고, x값은 0부터 시작하므로 limit 9, 3은 1개만 조회됨)
