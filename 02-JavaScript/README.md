@@ -1,3 +1,1 @@
 # JavaScript
-
-test2
