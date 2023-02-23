@@ -1,12 +1,13 @@
 # 표 그리기
 
-## #01) 표 그리기 기본 구성
+## 01) 표 그리기 기본 구성
 
 - 영역 구문이 모호할 경우 thead, tbody, tfoot은 생략할 수 있다.
-- tr,td,th는 필요한 만큼 반복 사용 가능
+- tr, td, th는 필요한 만큼 반복 사용 가능
 
 ```html
-<table border="굵기" width="넓이" ← 표의 영역 지정 align="left|center|right">
+<table border="굵기" width="넓이" align="left|center|right">
+  ← 표의 영역 지정
   <thead>
     ← 제목영역
     <tr>
@@ -31,16 +32,17 @@
 </table>
 ```
 
-## #02. 표의 줄, 칸 합치기
+## 02. 표의 줄, 칸 합치기
 
-td나 th 태그에 대하여...
+td나 th 태그에 대하여
 
 - colspan="숫자" --> 칸 합치기
 - rowspan="숫자" --> 줄 합치기
+- ex) `<th colspan=”2”>` → 2칸 합침
 
-## #03. 여백설정
+## 03. 여백설정
 
-table 태그에 대하여...
+table 태그에 대하여
 
 - cellpadding --> 칸과 내용 사이의 여백
 - cellspacing --> 칸과 칸 사이의 여백
