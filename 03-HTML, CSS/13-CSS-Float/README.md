@@ -1,12 +1,18 @@
 # float속성
 
-박스를 부모의 왼쪽이나 오른쪽에 고정시키고 문장을 그 옆으로 흐르도록 하기 위한 속성.
+- 박스를 부모의 왼쪽이나 오른쪽에 고정시키고 문장을 그 옆으로 흐르도록 하기 위한 속성
+- HTML 요소가 주변(수평으로 나열된)의 다른 요소들과 자연스럽게 어울리도록 만들어줌
+- float를 적용받은 요소의 다음 요소들이 끌어올려짐
+- float를 적용받은 요소의 방향을 결정(left, right)
+- 컨텐츠 크기 만큼만 영역을 설정
+- float를 적용받은 요소는 다른 요소보다 위쪽에 위치
+- ⭐️수평방향 정렬 시 사용
 
-## #01. 적용가능한 값
+## 01. 적용가능한 값
 
 - left(왼쪽), right(오른쪽), none(해제), inherit(부모값 상속)
 
-## #02. 제약사항
+## 02. 제약사항
 
 - 새로운 문단을 시작하기 위해서는 이전 float를 off시켜야 한다.
 - 부모요소가 float가 적용된 자식요소를 감싸지 못한다.
@@ -27,13 +33,13 @@ clear: both;
 부모의 :after 가상 클래스를 사용해서 아래의 코드 적용
 
 ```css
-content: '';
+content: "";
 display: block;
 float: none;
-clear: both
+clear: both;
 ```
 
-## #03. 특성
+## 03. 특성
 
 두 개 이상의 Block-Level요소에게 float를 연속적으로 적용하면 박스의 배치 효과
 
@@ -46,24 +52,26 @@ float 속성을 사용하여 각 영역을 배치하여 화면 레이아웃을 �
 
 ```html
 <div id="container">
-    <div id="header">상단영역</div>
-    <div id="content">내용영역</div>
-    <div id="footer">하단영역</div>
+  <div id="header">상단영역</div>
+  <div id="content">내용영역</div>
+  <div id="footer">하단영역</div>
 </div>
 ```
+
 - #container에 넓이와 margin속성을 사용하여 정렬을 구성
 - #header, #footer에 각 영역에 대한 height 지정 (고정높이)
 - #content 영역은 내용에 따라 높이가 변경되어야 하므로 min-height 지정(가변높이)
 
 #### 사이드바 구성
+
 ```html
 <div id="container">
-    <div id="header">상단영역</div>
-    <div id="content">
-        <div id="sidebar">사이드바</div>
-        <div id="body">내용영역</div>
-    </div>
-    <div id="footer">하단영역</div>
+  <div id="header">상단영역</div>
+  <div id="content">
+    <div id="sidebar">사이드바</div>
+    <div id="body">내용영역</div>
+  </div>
+  <div id="footer">하단영역</div>
 </div>
 ```
 
@@ -71,3 +79,14 @@ float 속성을 사용하여 각 영역을 배치하여 화면 레이아웃을 �
 - #sidebar와 #body를 float 속성을 사용하여 가로 배치
 
 > 최근에는 이 방식외에도 Flex나 Grid 기반 레이아웃 구성도 많이 활용되고 있습니다.
+
+<br/>
+
+## \* 다단 레이아웃
+
+- 텍스트 단을 column 속성으로 다단을 생성
+- 다단은 레이아웃을 여러개의 컬럼으로 쪼개서 구성한다는 의미
+- column-count : 단의 개수를 설정
+- column-rule : 단과 단 사이의 구분선, 구분의 모양, 두께, 색상을 설정
+- column-gap : 단과 단 사이의 여백을 설정
+- column-span : 단과 안의 포함된 요소를 다단편집에서 해제
